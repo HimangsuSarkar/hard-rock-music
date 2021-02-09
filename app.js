@@ -41,10 +41,14 @@ const displaySongs = songs => {
 }
 
 const getLyric = async (artist, title) => {
-    const url = `https://api.lyrics.ovh/v1/${artist}/${title}`;
-    const res = await fetch(url)
-    const data = await res.json()
-    displayLyrics(data.lyrics)
+    const url = `https://api.lyrics.ovh/v11/${artist}/${title}`;
+    try {
+        const res = await fetch(url)
+        const data = await res.json()
+        displayLyrics(data.lyrics)
+    } catch (error) {
+        displayError("Sorry i can't find any lyrics");
+    }
 }
 
 // const getLyric = (artist, title) => {
