@@ -1,20 +1,21 @@
-const searchSongs = async () => {
-    const searchText = document.getElementById('search-input').value;
-    const url = `https://api.lyrics.ovh/suggest/${searchText}`
-    // load data
-    const res = await fetch(url);
-    const data = await res.json();
-    displaySongs(data.data);
-}
-
-
-// const searchSongs = () => {
-//     const searchText = document.getElementById("search-input").value;
-//     const url = `https://api.lyrics.ovh/suggest/:${searchText}`
-//     fetch(url)
-//         .then(res => res.json())
-//         .then(data => displaySongs(data.data))
+// const searchSongs = async () => {
+//     const searchText = document.getElementById('search-input').value;
+//     const url = `https://api.lyrics.ovh/suggest/${searchText}`
+//     // load data
+//     const res = await fetch(url);
+//     const data = await res.json();
+//     displaySongs(data.data);
 // }
+
+
+const searchSongs = () => {
+    const searchText = document.getElementById("search-input").value;
+    const url = `https://api.lyrics.ovh/suggest/:${searchText}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displaySongs(data.data))
+        .catch(error => displayError('Something Wrong!!Please try again'));
+}
 const displaySongs = songs => {
     const songsContainer = document.getElementById('songs-container');
     songsContainer.innerHTML = '';
@@ -56,4 +57,9 @@ const getLyric = async (artist, title) => {
 const displayLyrics = lyrics => {
     const lyricsDiv = document.getElementById('song-lyrics');
     lyricsDiv.innerText = lyrics;
+}
+
+const displayError = error => {
+    const errorTag = document.getElementById("error-message");
+    errorTag.innerText = error;
 }
